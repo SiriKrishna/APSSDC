@@ -48,3 +48,4 @@ class ItemsForm(forms.ModelForm):
 			"class":"form-control my-2",
 			}),
 		}		
+		
