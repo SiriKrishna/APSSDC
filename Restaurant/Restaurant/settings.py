@@ -129,3 +129,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'RestApp/static/images/')
+
+LOGIN_URL = 'lg'
+LOGIN_REDIRECT_URL = 'hm'
+
+AUTH_USER_MODEL = 'RestApp.User'
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '************'
+EMAIL_HOST_PASSWORD = '*********'
