@@ -1,7 +1,7 @@
 {% extends 'app/base.html' %}
 {% block title %} Items List {% endblock %}
 {% block content %}
-<div class="container mt-4">
+<div class="container-fluid mt-4">
 	{% if messages %}
 {% for m in messages %}
 <div class="alert alert-{{m.tags}} alert-dismissible">
@@ -10,14 +10,22 @@
 </div>
 {% endfor %}
 {% endif %}
-	<div class="row">
-		<div class="card col col-md-4 mx-2 shadow-lg">
+	<div class="row mx-2">
+		<div class="card col col-md-4 mx-2 shadow-lg h-100">
 			<div class="card-body">
 				<h3 class="bg-info text-light border rounded text-center p-2">Add Items</h3>
 				<form method="post" enctype="multipart/form-data">
 					{% csrf_token %}
 					{% for n in r %}
+					{% if forloop.counter == 1 %}
+						<select class="form-control my-2" name="rsid">
+							{% for j in er %}
+							<option value="{{j.id}}">{{j}}</option>
+							{% endfor %}
+						</select>
+					{% elif forloop.counter >= 2 %}
 					<div>{{n}}</div>
+					{% endif %}
 					{% endfor %}
 					<div class="row">
 						<div class="col">
@@ -36,6 +44,7 @@
 				<table class="table table-borderless table-hover">
 					<tr class="bg-dark text-light">
 						<th>Sno</th>
+						<th>R Name</th>
 						<th>Item Name</th>
 						<th>Category</th>
 						<th>Price</th>
@@ -45,23 +54,24 @@
 					{% for v in s %}
 					<tr>
 						<td>{{forloop.counter}}</td>
-						<td>{{v.iname}}</td>
+						<td>{{v.6}}</td>
+						<td><a href="{% url 'itmv' v.5 %}">{{v.0}}</a></td>
 						<td>
-							{% if v.icategory == 'VG' %}
+							{% if v.1 == 'VG' %}
 							<span class="badge badge-success">Vegeterian</span>
 							{% else %}
 							<span class="badge badge-danger">Non Vegeterian</span>
 							{% endif %}
 						</td>
-						<td>{{v.price}}</td>
+						<td>{{v.2}}</td>
 						<td>
-							{% if v.itavailability == 'AV' %}
+							{% if v.4 == 'AV' %}
 							<span class="badge badge-success">Available</span>
 							{% else %}
 							<span class="badge badge-danger">Not Available</span>
 							{% endif %}
 						</td>
-						<td><a href="#" class="btn btn-outline-info mx-1">Update</a><a href="#" class="btn btn-outline-danger mx-1">Delete</a></td>
+						<td><a href="{% url 'itup' v.5 %}" class="btn btn-outline-info mx-1">Update</a><a href="{% url 'itdl' v.5 %}" class="btn btn-outline-danger mx-1">Delete</a></td>
 					</tr>
 					{% endfor %}
 				</table>
